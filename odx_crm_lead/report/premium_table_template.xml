@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="premium_table_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="odx_crm_lead.external_layout_custom">
+                        <div class="page">
+                            <br/>
+                            <table width="100%" class="table-bordered mt32">
+                                <tr>
+                                    <th style="color: #1c2dab;background-color:#60a8c4; text-align: center;">
+                                        MOTOR INSURANCE QUOTATION
+                                    </th>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table width="100%" class="table-bordered mt32">
+                                <tr>
+                                    <th style="color: #1c2dab;background-color:#60a8c4;">Customer:</th>
+                                    <td>
+                                        <span t-field="o.partner_id"/>
+                                    </td>
+                                    <th style="color: #1c2dab;background-color:#60a8c4;">Age :</th>
+                                    <td>
+                                        <span t-field="o.age"/>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th style="color: #1c2dab;background-color:#60a8c4;">Date :</th>
+                                    <td>
+                                        <span t-field="o.date_order"  t-options='{"widget": "date"}'/>
+                                    </td>
+                                    <th style="color: #1c2dab;background-color:#60a8c4;">No Claim Years:</th>
+                                    <td>
+                                        <span t-field="o.years_of_no_claim_certificate"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="color: #1c2dab;background-color:#60a8c4;">EXACT VEHICLE</th>
+                                    <th colspan="3"><span t-field="o.vehicle_id"/></th>
+                                </tr>
+                            </table>
+                            <br/>
+
+                            <table t-if="o.insurence_category == 'motor_insurance'" width="100%" height="100"
+                                   class="table-bordered mt32">
+                                <tr>
+                                    <th style="color: #00ad26;">INSURANCE COMPANY</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <th>
+                                            <span style="color: #4fc9e2;" t-if="insurance"
+                                                  t-field="insurance.insurance_company_id"/>
+                                        </th>
+                                    </t>
+                                </tr>
+                                <tr style="border: 1px solid black; background-color:#98FB98;">
+                                    <th style="color: #1c2dab;">VEHICLE VALUE</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+<!--                                            <span style="color: #1c2dab;" t-field="o.vehicle_id"/>-->
+<!--                                            <br/>-->
+                                            <span style="color: #1c2dab;"
+                                                  t-field="insurance.car_value"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                    </t>
+
+                                </tr>
+<!--                                <tr style="border: 1px solid black; background-color:#60a8c4;">-->
+<!--                                    <th style="color: #1c2dab;">BENEFITS</th>-->
+<!--                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"-->
+<!--                                       t-as="insurance">-->
+<!--                                        <td>-->
+<!--                                        </td>-->
+<!--                                    </t>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <th>Third Party Bodily Injury</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span style="color: #4fc9e2;" t-if="insurance.manual_insurance_premium_id"
+                                                  t-field="insurance.manual_insurance_premium_id.blood_money"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Third Party Property Damage</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span style="color: #4fc9e2;" t-if="insurance.manual_insurance_premium_id"
+                                                  t-field="insurance.manual_insurance_premium_id.third_party_liability"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Own Vehicle Loss or Damage</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.loss_dammage">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Repair Type</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span style="color: #4fc9e2;" t-if="insurance.manual_insurance_premium_id"
+                                                  t-field="insurance.manual_insurance_premium_id.repaire_type"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Valet Parking Damage andTheft</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.storm_flood">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Loss Of Personal Belongings</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.personal_belongigs">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Fire and Theft Cover</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.fire_theft">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Ambulance Cover</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.ambulance_cover">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Oman cover</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span style="color: #4fc9e2;" t-if="insurance.manual_insurance_premium_id"
+                                                  t-field="insurance.manual_insurance_premium_id.oman_cover"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Natural Perils</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.natural_perils">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Off road Cover</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.p_off_road">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>windscreen damage</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.excess_for_windscreen">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Riot and Strike</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.riot_strike">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Road Side Assistance</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.road_side_assistance">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Rent A Car</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.rent_a_car">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Emergency medical expenses</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.emergency_medical_expenses">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Personal Accident Driver</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.driver_cover">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <th>Personal Accident Passenger</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <t t-if="insurance.manual_insurance_premium_id">
+                                                <t t-if="insurance.manual_insurance_premium_id.passanger_cover">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/tik.png'"
+                                                         style="width:40px;height:10px"/>
+
+                                                </t>
+                                                <t t-else=" ">
+                                                    <img t-att-src="'/odx_crm_lead/static/src/cross.png'"
+                                                         style="width:25px;height:10px"/>
+                                                </t>
+                                            </t>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr></tr>
+                                <tr>
+                                    <th style="color: #1c2dab;">Excess</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span style="color: #4fc9e2;" t-if="insurance.manual_insurance_premium_id"
+                                                  t-field="insurance.manual_insurance_premium_id.excess"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr style="border: 1px solid black; background-color:#87ceeb;">
+                                    <th style="color: #1c2dab;">Base Premium</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span t-if="insurance" t-field="insurance.amount"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr style="border: 1px solid black; background-color:#87ceeb;">
+                                    <th style="color: #1c2dab;">TAX</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span t-if="insurance" t-field="insurance.tax_amount"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr style="border: 1px solid black; background-color:#87ceeb;">
+                                    <th style="color: #1c2dab;">Total</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                            <span t-if="insurance" t-field="insurance.total_amount"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                            <!--                            <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"-->
+
+                            <!--                               t-as="insurance">-->
+                            <!--                                <table t-if="o.insurence_category == 'family_medical'" width="100%" height="100"-->
+                            <!--                                       class="table-bordered mt32">-->
+                            <!--                                    <tr>-->
+                            <!--                                        <th>Insurance Company Name</th>-->
+                            <!--                                        <td>-->
+                            <!--                                            <span style="color: #4fc9e2;" t-if="insurance"-->
+                            <!--                                                  t-field="insurance.insurance_company_id"/>-->
+                            <!--                                        </td>-->
+                            <!--                                        <td colsoan="2"></td>-->
+                            <!--                                        <th>Copay</th>-->
+                            <!--                                    </tr>-->
+                            <!--                                    <tr>-->
+                            <!--                                        <th>Package Name</th>-->
+                            <!--                                        <td></td>-->
+                            <!--                                        <td colsoan="2"></td>-->
+                            <!--                                        <th>Deductable</th>-->
+                            <!--                                    </tr>-->
+                            <!--                                    <tr>-->
+                            <!--                                        <th>Name Of The Members</th>-->
+                            <!--                                        <th>Date Of Birth</th>-->
+                            <!--                                        <th>Gender</th>-->
+                            <!--                                        <th>Network</th>-->
+                            <!--                                        <th>Premium</th>-->
+                            <!--                                        <th>VAT</th>-->
+                            <!--                                        <th>Total Premum</th>-->
+                            <!--                                    </tr>-->
+                            <!--                                </table>-->
+                            <!--                            </t>-->
+                            <p style="page-break-after:always;"></p>
+                            <div style="border: 1px solid black;">
+                                <center>
+                                    <h1 style="color: #1c2dab;background-color:#60a8c4;">Required Documents</h1>
+                                </center>
+                                <br/>
+                                <p>1. Passport copy with valid visa page or Emirates ID copy (Personal Vehicles)
+                                    <br/>
+                                    2. Vehicle registration Card copy (both sides) OR vehicle invoice copy for new
+                                    vehicles
+                                    <br/>
+                                    3. Driving License copy
+                                    <br/>
+                                    4. Trade license copy (Commercial vehicles)
+                                </p>
+                                <br/>
+                            </div>
+                            <br/>
+                            <div style="border: 1px solid black;">
+                                <center>
+                                    <h1 style="color: #1c2dab;background-color:#60a8c4;">Terms and Conditions</h1>
+                                </center>
+                                <br/>
+                                <p>
+                                    1. Listed benefits are indicative. Detailed terms and conditions are as per each
+                                    insurance company’s policy.
+                                    <br/>
+                                    2. The quotes provided are valid for 30 days from the date of providing this quote.
+                                    <br/>
+                                    3. We reserve the right to amend or withdraw this quotation, if any of the
+                                    information is incorrect and/or if there is a material
+                                    change in the risk / claims
+                                    <br/>
+                                    4. If the driver is below the Age of 25 or driving experience is less than 1 year,
+                                    at the time of accident, an additional excess of 10%
+                                    of the claim amount will be applied.
+                                    <br/>
+                                    5. Insurance Policies and its amendments in case the insured request new parts
+                                    instead of the damaged parts due to an accident
+                                    or prefers paying its value in cash, this should be considered. The insured is
+                                    liable for the depreciation percentage mentioned in
+                                    the in the policy.
+                                    <br/>
+                                    6. Additional fees (Policy Fee, Ambulance Fee, EVG Fee and others) are not
+                                    refundable
+                                    <br/>
+                                    7. Wherever Geographical Area is extended to cover Oman, orange card to be obtained
+                                    prior to travelling subject to terms and
+                                    condition of respective insurer.
+                                    <br/>
+                                    8. For policies with Rent a Car benefits, in the event of claim, the rent a car
+                                    company will take an imprint of the credit card, and an
+                                    amount of AED 1,000 will be blocked as security for a period of 30 days. This is
+                                    done to set off any traffic fines incurred by the
+                                    lessee during the period
+                                    <br/>
+                                    9. Vehicle registration to be completed within the following time limit stipulated
+                                    by the respective authority:
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;1. Abu Dhabi, Al Ain – 3 days from the policy inception date
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;2. Dubai - 30 days from the policy inception date
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;3. Sharjah – 5 days from the policy inception date
+                                    <br/>
+                                    &#160;&#160;&#160;&#160;4. UAQ, Fujairah and Ras Al Khaimah – 1 day from the policy
+                                    inception date
+                                </p>
+                                <br/>
+                            </div>
+                                                        <p style="page-break-after:always;"></p>
+                            <br/>
+                            <div style="border: 1px solid black;">
+                                <center>
+                                    <h1 style="color: #1c2dab;background-color:#60a8c4;">Disclaimer</h1>
+                                </center>
+                                <br/>
+                                <p>
+                                    1. Tell us immediately if any of the information stated in quotation is incorrect.
+                                    Failure to do so may invalidate this quote and any
+                                    subsequent policy issued.
+                                    <br/>
+                                    2. List of questions we have asked to generate this quotation can be exhaustive,
+                                    please consider carefully whether there is any
+                                    other material information known to you which could influence insurer's acceptance
+                                    and risk.
+                                    <br/>
+                                    3. Assessment of the material Information would include any special feature of the
+                                    car, driver's history etc
+                                    <br/>
+                                    4. Vehicle value entered by the you should be valid and should consider yearly
+                                    depreciation rules. Insurers will evaluate the
+                                    vehicle value and may change the value and this is the discretion of the insurer
+                                    <br/>
+                                    5. We reserve the right to ask for any additional information, alter or decline this
+                                    offer
+                                    <br/>
+                                    6. Insurance will not commence until the Insurers have indicated their acceptance of
+                                    the proposal and a certificate of Motor
+                                    Insurance has been issued
+                                    <br/>
+                                    7. The issuance of policy and effectiveness of cover by Insurer is subject to
+                                    payment of premium.
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

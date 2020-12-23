@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="vehicle_brand_tree_view">
+            <field name="name">vehicle.brand.tree</field>
+            <field name="model">vehicle.brand</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="vehicle_brand_form_view">
+            <field name="name">vehicle.brand.form</field>
+            <field name="model">vehicle.brand</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <div>
+                                <field name="image_128" widget="image" class="oe_avatar"/>
+                                <label for="name" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="name"/>
+                                    <field name="model_ids" invisible="1"/>
+
+                                </h1>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id='vehicle_brand_view_kanban' model='ir.ui.view'>
+            <field name="name">vehicle.brand.kanban</field>
+            <field name="model">vehicle.brand</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="id"/>
+                    <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open" href="#" class="o_kanban_image oe_kanban_action">
+                                    <img alt="Open"
+                                         t-att-src="kanban_image('vehicle.brand', 'image_128', record.id.raw_value)"
+                                         class="img-fluid" style="width:100px;"/>
+                                </a>
+                                <div class="oe_kanban_details">
+                                    <h4 class="oe_partner_heading">
+                                        <a type="open" class="o_kanban_record_title">
+                                            <field name="name"/>
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_vehcle_brand">
+            <field name="name">Car Manufacturers</field>
+            <field name="res_model">vehicle.brand</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first item
+                </p>
+            </field>
+        </record>
+        <menuitem name="Car Manufacturers" id="menu_manufacturers" action="action_vehcle_brand" parent="uae_vehicles"/>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+

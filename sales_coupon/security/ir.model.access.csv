@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_coupon,access_sale_coupon,sales_coupon.model_sale_coupon,base.group_system,1,1,1,1
+access_sale_coupon_template,access.sale.coupon.template,model_sale_coupon_template,base.group_user,1,1,1,1

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="expenses_standard">
+        <div class="article o_report_layout_standard">
+            <t t-raw="0"/>
+        </div>
+        <div class="header" style="margin-left: 15px;margin-right:15px;">
+            <table style="width:100%;margin-bottom:32px;">
+                <thead>
+                    <tr>
+                        <td style="width:30%;">
+                            <h5>Issue Date</h5>
+                            <h5>SI No</h5>
+                            <h5>Barcode</h5>
+                        </td>
+                        <td style="width:30%;">
+                            <h5><t t-esc="o.create_date.strftime('%d-%m-%Y')"/></h5>
+                            <h6><t t-esc="o.code"/></h6>
+                            <img alt="Barcode" t-att-src="'/report/barcode/Code128/%s' % o.code" style="width: 250px; height: 40px; margin-left: -35px;"/>
+                        </td>
+                        <td style="width:40%;text-align:right">
+                            <img t-if="o.program_id.company_id.logo" t-att-src="image_data_uri(o.program_id.company_id.logo)" t-att-alt="'%s' % (o.program_id.company_id.name)" style="width: 100%; border:0px solid transparent;"/>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="footer o_standard_footer" style="margin-left:-15px;margin-right:-15px;">
+            <table style="width:100%;background-color:#FD7E09;">
+                <thead>
+                    <tr>
+                        <td style="width:30%;padding-left:10px;padding-top:15px;padding-bottom:15px;">
+                            <p style="font-size:20px;color:#FD7E09;margin:0;padding-left:10px">a</p>
+                            <p style="margin:0px;color:white;font-size:18px;font-weight:bold;">
+                                <t t-esc="o.program_id.company_id.website"/>
+                            </p>
+                            <p style="font-size:20px;color:#FD7E09;margin:0;padding-left:10px">a</p>
+                        </td>
+                        <td style="width:70%;padding-left:10px;padding-top:15px;padding-bottom:15px;">
+                            <p style="font-size:18px;color:white;margin:0;padding-left:10px">
+                                <t t-esc="o.program_id.company_id.name"/>
+                            </p>
+                            <p style="font-size:18px;color:white;margin:0;padding-left:10px">
+                                <t t-esc="o.program_id.company_id.street"/>
+                                <t t-if="o.program_id.company_id.street2">
+                                    ,<t t-esc="o.program_id.company_id.street2"/>
+                                </t>
+                                <t t-if="o.program_id.company_id.city">
+                                    ,<t t-esc="o.program_id.company_id.city"/>
+                                </t>
+                                <t t-if="o.program_id.company_id.country_id.name">
+                                    ,<t t-esc="o.program_id.company_id.country_id.name"/>
+                                </t>
+                                <t t-if="o.program_id.company_id.zip">
+                                    ,<t t-esc="o.program_id.company_id.zip"/>
+                                </t>
+                            </p>
+                            <p style="font-size:18px;color:white;margin:0;padding-left:10px">
+                                <t t-esc="o.program_id.company_id.email"/>, <t t-esc="o.program_id.company_id.phone"/>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </template>
+
+    <template id="web_expenses_log"><!-- Multicompany -->
+
+        <t t-call="sales_coupon.expenses_standard">
+            <t t-raw="0"/>
+        </t>
+        <!--</t>-->
+    </template>
+
+    <template id="report_coupon_genrate_code">
+        <t t-call="sales_coupon.web_expenses_log">
+            <div class="page" style="margin-left: 15px;margin-right:15px;">
+                <table style="width:100%;border:1px solid gray;margin-top:32px;">
+                    <thead>
+                        <tr>
+                            <td style="width:70%;padding-left:10px;border-right:1px solid gray;">
+                                <h1 style="font-weight:bold;padding-top:5px;margin:0px;font-size:20px;"><t t-raw="o.title"/></h1>
+                                <h1 style="letter-spacing:2px;margin:0px;font-weight:200"><t t-raw="o.sub_title"/></h1>
+                            </td>
+                            <td style="width:30%;background-color:#f1f1f1;padding-left:10px;padding-right:10px;">
+                                <img t-att-src="'data:image/png;base64,%s' % to_text(o.image)" style="width:100%;padding-top:16px;" alt=""/>
+                                <h2 style="font-weight:bold;padding-top:15px;">
+                                    <img src="/sales_coupon/static/src/img/location-icon.png" style="width:13%;padding-left:5px"/>
+                                    <a style="color:black" t-att-href="o.location_url"><span>Location</span></a>
+                                </h2>
+                                <p style="margin:0;padding-left:10px"><t t-esc="o.street_1"/></p>
+                                <p style="margin:0;padding-left:10px"><t t-esc="o.street_2"/></p>
+                                <p style="margin:0;padding-left:10px"><t t-esc="o.street_3"/></p>
+                                <p style="margin:0;padding-left:10px"><t t-esc="o.street_4"/></p>
+                                <p style="margin:0;padding-left:10px"><t t-esc="o.country_id.name"/></p>
+                                <p style="margin:0;padding-left:10px">Phone: <t t-esc="o.phone"/></p>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                <table style="width:100%;margin-top:32px;">
+                    <thead>
+                        <tr>
+                            <td style="width:10%;">
+                                <img src="/sales_coupon/static/src/img/Question Icon.png" style="width:90%;height:70px"/>
+                            </td>
+                            <td style="width:55%;">
+                                <h4 style="font-weight:bold;font-size:20px;">
+                                    HOW TO USE IT?
+                                </h4>
+                                <p style="font-size:20px">
+                                    <t t-raw="o.how_to_use"/>
+                                </p>
+                            </td>
+                            <td style="width:5%;"/>
+                            <td style="width:30%;padding-left:15px">
+                                <h4 style="font-weight:bold;font-size:20px;">
+                                    TERMS &amp; CONDITIONS
+                                </h4>
+                                <p style="font-size:20px">
+                                    <t t-raw="o.terms_condidion"/>
+                                </p>
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="sale_coupon_report_templates">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="sales_coupon.report_coupon_genrate_code"/>
+            </t>
+        </t>
+    </template>
+</odoo>

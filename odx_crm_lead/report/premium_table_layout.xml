@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="external_layout_standard">
+        <!--        <div class="header o_background_header">-->
+        <div class="article o_report_layout_standard">
+            <t t-raw="0"/>
+        </div>
+        <div class="header" style="margin-left: 15px;margin-right:15px;">
+            <p style="margin:0;padding-left:10px;text-align: center;">
+                <span class="page"/>&#160;of&#160;<span class="topage"/>
+            </p>
+            <table style="width:100%;margin-bottom:32px;">
+                <thead>
+                    <tr>
+                        <td style="width:30%;">
+                            <h6>
+                                <t t-esc="o.name"/>
+                            </h6>
+                            <!--                            <h5>Issue Date</h5>-->
+<!--                            <h5>SI No</h5>-->
+                            <!--                            <h5>Barcode</h5>-->
+                        </td>
+                        <td style="width:30%;">
+                            <!--                            <h5><t t-esc="o.date_order.strftime('%d-%m-%Y')"/></h5>-->
+<!--                            <h6>-->
+<!--                                <t t-esc="o.name"/>-->
+<!--                            </h6>-->
+                            <!--                            <img alt="Barcode" t-att-src="'/report/barcode/Code128/%s' % o.name" style="width: 250px; height: 40px; margin-left: -35px;"/>-->
+                        </td>
+                        <td style="width:40%;text-align:right">
+                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                                 t-att-alt="'%s' % (o.company_id.name)"
+                                 style="width: 100%; border:0px solid transparent;"/>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="footer o_standard_footer" style="margin-left:-15px;margin-right:-15px;">
+            <table style="width:100%;background-color:#FD7E09;">
+                <thead>
+                    <tr>
+                        <td style="width:30%;padding-left:10px;padding-top:15px;padding-bottom:15px;">
+                            <p style="font-size:20px;color:#FD7E09;margin:0;padding-left:10px">a</p>
+                            <p style="margin:0px;color:white;font-size:18px;font-weight:bold;">
+                                <t t-esc="o.company_id.website"/>
+                            </p>
+                            <p style="font-size:20px;color:#FD7E09;margin:0;padding-left:10px">a</p>
+                        </td>
+                        <td style="width:70%;padding-left:10px;padding-top:15px;padding-bottom:15px;">
+                            <p style="font-size:18px;color:white;margin:0;padding-left:10px">
+                                <t t-esc="o.company_id.name"/>
+                            </p>
+                            <p style="font-size:18px;color:white;margin:0;padding-left:10px">
+                                <t t-esc="o.company_id.street"/>
+                                <t t-if="o.company_id.street2">
+                                    ,
+                                    <t t-esc="o.company_id.street2"/>
+                                </t>
+                                <t t-if="o.company_id.city">
+                                    ,
+                                    <t t-esc="o.company_id.city"/>
+                                </t>
+                                <t t-if="o.company_id.country_id">
+                                    ,
+                                    <t t-esc="o.company_id.country_id.name"/>
+                                </t>
+                                <t t-if="o.company_id.zip">
+                                    ,
+                                    <t t-esc="o.company_id.zip"/>
+                                </t>
+                            </p>
+                            <p style="font-size:18px;color:white;margin:0;padding-left:10px">
+                                <t t-esc="o.company_id.email"/>,
+                                <t t-esc="o.company_id.phone"/>
+                            </p>
+                        </td>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </template>
+    <template id="external_layout_custom">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"/>
+        </t>
+
+        <t t-call="odx_crm_lead.external_layout_standard">
+            <t t-raw="0"/>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_policy_report" model="report.paperformat">
+            <field name="name">paperformat.policy.report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_right">0</field>
+            <field name="margin_bottom">28</field>
+            <field name="margin_left">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+         <report
+            id="print_premium_table"
+            model="sale.order"
+            string="Premium Table"
+            report_type="qweb-pdf"
+            name="odx_crm_lead.premium_table_template"
+            file="odx_crm_lead.premium_table_template"
+            attachment_use="False"
+            menu="True"
+        />
+        <record id="print_premium_table" model="ir.actions.report">
+            <field name="paperformat_id" ref="odx_crm_lead.paperformat_policy_report"/>
+        </record>
+
+    </data>
+
+</odoo>
