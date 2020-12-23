@@ -4,4 +4,8 @@ from . import res_partner
 from . import product_product
 from . import send_email
 from . import insurance_premium
+from . import benefits
+from . import comprehensive_insurance
+from . import third_party_insurance
 from . import manual_insurance_policy
+from . import cover_locker

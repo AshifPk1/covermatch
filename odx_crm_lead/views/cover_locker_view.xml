@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="cover_locker_tree_view">
+            <field name="name">cover.locker.tree</field>
+            <field name="model">cover.locker</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="insurance_type"/>
+                    <field name="insurance_expiry_date"/>
+                    <field name="insurance_premium"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="cover_locker_form_view">
+            <field name="name">cover.locker.form</field>
+            <field name="model">cover.locker</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="insurance_type"/>
+                                <field name="insurance_expiry_date"/>
+                            </group>
+                            <group>
+                                 <field name="insurance_premium"/>
+                                <field name="insurance_document"/>
+                                <field name="insurance_document_name" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_cover_locker">
+            <field name="name">Cover Locker</field>
+            <field name="res_model">cover.locker</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first item
+                </p>
+            </field>
+        </record>
+        <menuitem name="Cover Locker" id="menu_cover_locker" action="action_cover_locker"
+                  parent="odx_uae_car_valuation.uae_vehicles"/>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+

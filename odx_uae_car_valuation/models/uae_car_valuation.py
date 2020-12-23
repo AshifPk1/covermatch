@@ -21,11 +21,11 @@ class UaeCarValuation(models.Model):
     no_of_doors = fields.Char("No Of Doors")
     no_of_seats = fields.Char("No Of Seats")
     version_category = fields.Many2one('vehicle.version.category', "Category")
-    vehicle_type = fields.Selection(
-        [('saloon', 'Saloon'), ('4_4', '4*4'), ('p_up', 'P/UP'), ('motor_cycle', 'Motor Cycle'),
-         ('trailer_watertanker', 'Trailer & Water Tanker'), ('equipments', 'Equipments'), ('bus', 'Bus'),
-         ('van', 'Van')],
-        string="Vehicle Type", required=True)
+    # vehicle_type = fields.Selection(
+    #     [('saloon', 'Saloon'), ('4_4', '4*4'), ('p_up', 'P/UP'), ('motor_cycle', 'Motor Cycle'),
+    #      ('trailer_watertanker', 'Trailer & Water Tanker'), ('equipments', 'Equipments'), ('bus', 'Bus'),
+    #      ('van', 'Van')],
+    #     string="Vehicle Type", required=False)
 
     @api.depends('make_id.name', 'model_id.name', 'version_id.name')
     def _compute_vehicle_name(self):

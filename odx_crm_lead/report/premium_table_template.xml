@@ -14,6 +14,7 @@
                                     </th>
                                 </tr>
                             </table>
+
                             <br/>
                             <table width="100%" class="table-bordered mt32">
                                 <tr>
@@ -30,9 +31,9 @@
                                 <tr>
                                     <th style="color: #1c2dab;background-color:#60a8c4;">Date :</th>
                                     <td>
-                                        <span t-field="o.date_order"  t-options='{"widget": "date"}'/>
+                                        <span t-field="o.date_order"/>
                                     </td>
-                                    <th style="color: #1c2dab;background-color:#60a8c4;">No Claim Years:</th>
+                                    <th style="color: #1c2dab;background-color:#60a8c4;">No Claims :</th>
                                     <td>
                                         <span t-field="o.years_of_no_claim_certificate"/>
                                     </td>
@@ -70,14 +71,14 @@
                                     </t>
 
                                 </tr>
-<!--                                <tr style="border: 1px solid black; background-color:#60a8c4;">-->
-<!--                                    <th style="color: #1c2dab;">BENEFITS</th>-->
-<!--                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"-->
-<!--                                       t-as="insurance">-->
-<!--                                        <td>-->
-<!--                                        </td>-->
-<!--                                    </t>-->
-<!--                                </tr>-->
+                                <tr style="border: 1px solid black; background-color:#60a8c4;">
+                                    <th style="color: #1c2dab;">BENEFITS</th>
+                                    <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"
+                                       t-as="insurance">
+                                        <td>
+                                        </td>
+                                    </t>
+                                </tr>
                                 <tr>
                                     <th>Third Party Bodily Injury</th>
                                     <t t-if="o.insurance_premium_table_ids" t-foreach="o.insurance_premium_table_ids"

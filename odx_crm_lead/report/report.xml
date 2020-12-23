@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="paperformat_policy_report" model="report.paperformat">
+         <record id="paperformat_policy_report" model="report.paperformat">
             <field name="name">paperformat.policy.report</field>
             <field name="default" eval="True"/>
             <field name="format">A4</field>
@@ -24,10 +24,21 @@
             attachment_use="False"
             menu="True"
         />
-        <record id="print_premium_table" model="ir.actions.report">
+         <report
+            id="print_policy_quotation"
+            model="sale.order"
+            string="Policy Quotation"
+            report_type="qweb-pdf"
+            name="odx_crm_lead.policy_quoatation_template"
+            file="odx_crm_lead.policy_quoatation_template"
+            attachment_use="False"
+            menu="True"
+        />
+         <record id="print_premium_table" model="ir.actions.report">
             <field name="paperformat_id" ref="odx_crm_lead.paperformat_policy_report"/>
         </record>
-
+         <record id="print_policy_quotation" model="ir.actions.report">
+            <field name="paperformat_id" ref="odx_crm_lead.paperformat_policy_report"/>
+        </record>
     </data>
-
 </odoo>

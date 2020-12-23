@@ -111,13 +111,14 @@
             </field>
         </record>
 
-        <record id="sale_coupon_template_view_tree_custom" model="ir.ui.view">
-            <field name="name">sale.coupon.template.tree</field>
+
+        <record id="sale_coupon_template_view_form" model="ir.ui.view">
+            <field name="name">sale.coupon.template.form</field>
             <field name="model">sale.coupon.template</field>
             <field name="arch" type="xml">
-                <tree string="Sale Coupon Template" create="true" delete="true" edit="true">
-                    <field name="name"/>
+                <tree string="Sale Coupon Template">
                     <field name="is_default"/>
+                    <field name="name"/>
                     <field name="title"/>
                     <field name="sub_title"/>
                     <field name="image"/>
@@ -127,20 +128,18 @@
                     <field name="street_4"/>
                     <field name="country_id"/>
                     <field name="phone"/>
-                    <field name="location_url"/>
+                    <field name="location_url" widget="url"/>
                     <field name="how_to_use"/>
                     <field name="terms_condidion"/>
                 </tree>
             </field>
         </record>
 
-        <record id="sale_coupon_template_view_form_custom" model="ir.ui.view">
+        <record id="sale_coupon_template_view_form" model="ir.ui.view">
             <field name="name">sale.coupon.template.form</field>
             <field name="model">sale.coupon.template</field>
             <field name="arch" type="xml">
-                <form string="Coupon Template">
-                    <header>
-                    </header>
+                <form string="Coupon Template" create="false" delete="false">
                     <sheet>
                         <group string="Coupon Details">
                             <field name="is_default"/>
@@ -163,7 +162,7 @@
             </field>
         </record>
 
-         <record id="sale_coupons_template_action_custom" model="ir.actions.act_window">
+         <record id="sale_coupons_template_action" model="ir.actions.act_window">
             <field name="name">Coupon Templates</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">sale.coupon.template</field>
@@ -177,12 +176,7 @@
             </field>
         </record>
 
-        <menuitem 
-            id="menu_sale_coupon_template" 
-            name="Coupon Template" 
-            parent="sale.product_menu_catalog" 
-            action="sale_coupons_template_action_custom" 
-            sequence="7"/>
+        <menuitem id="menu_sale_coupon_template" name="Coupon Template" parent="sale.product_menu_catalog" action="sale_coupons_template_action" sequence="7"/>
 
         <record id="sale_coupon_generate_view_form_inhe" model="ir.ui.view">
             <field name="name">sale.coupon.generate.program.form</field>

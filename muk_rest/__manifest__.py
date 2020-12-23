@@ -55,7 +55,7 @@
         'Mathias Markl <mathias.markl@mukit.at>',
     ],
     'depends': [
-        'muk_autovacuum',
+        'muk_autovacuum','odx_crm_lead','odx_uae_car_valuation','sale'
     ],
     'data': [
         'security/ir.model.access.csv',

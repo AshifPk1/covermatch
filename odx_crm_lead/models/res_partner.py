@@ -8,3 +8,4 @@ class ResPartner(models.Model):
 
     is_insurance_comapny = fields.Boolean("Is Insurance Company")
     is_insurance_broker = fields.Boolean("Is Insurance Broker")
+    is_takaful = fields.Boolean("Takaful")

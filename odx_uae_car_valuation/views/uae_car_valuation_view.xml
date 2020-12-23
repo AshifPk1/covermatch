@@ -57,7 +57,7 @@
                                 <field name="estimated_price_old_min"/>
                                 <field name="no_of_seats"/>
                                 <field name="version_category"/>
-                                <field name="vehicle_type"/>
+<!--                                <field name="vehicle_type"/>-->
                             </group>
                         </group>
                     </sheet>

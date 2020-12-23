@@ -7,8 +7,11 @@ access_premium_type,access_premium.type,odx_crm_lead.model_premium_type,,1,1,1,1
 access_premium_details,access_premium.details,odx_crm_lead.model_premium_details,,1,1,1,1
 access_insurance_premium,access_insurance.premium,odx_crm_lead.model_insurance_premium,,1,1,1,1
 access_insurance_premium_table,access_insurance.premium.table,odx_crm_lead.model_insurance_premium_table,,1,1,1,1
+access_res_benefits,access_res.benefits,odx_crm_lead.model_res_benefits,,1,1,1,1
+access_comprehensive_insurance,access_comprehensive.insurance,odx_crm_lead.model_comprehensive_insurance,,1,1,1,1
+access_thirdparty_insurance,access_thirdparty.insurance,odx_crm_lead.model_thirdparty_insurance,,1,1,1,1
 access_manual_insurance_premium,access_manual_insurance_premium,odx_crm_lead.model_manual_insurance_premium,,1,1,1,1
-
+access_cover_locker,access_cover_locker,odx_crm_lead.model_cover_locker,,1,1,1,1
 
 
 

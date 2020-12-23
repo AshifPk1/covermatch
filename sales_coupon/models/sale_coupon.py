@@ -51,7 +51,6 @@ class Couponwizard(models.TransientModel):
                         'location_url': self.template_id.location_url or False,
                         'how_to_use': self.template_id.how_to_use or False,
                         'terms_condidion': self.template_id.terms_condidion or False,
-                        'template_id': self.template_id.id
                     })
                 coupon = self.env['sale.coupon'].create(vals)
 
@@ -71,7 +70,6 @@ class Couponwizard(models.TransientModel):
                         'location_url': self.template_id.location_url or False,
                         'how_to_use': self.template_id.how_to_use or False,
                         'terms_condidion': self.template_id.terms_condidion or False,
-                        'template_id': self.template_id.id
                     })
                 vals.update({'partner_id': partner.id})
                 coupon = self.env['sale.coupon'].create(vals)

@@ -134,6 +134,7 @@ class AuthenticationController(http.Controller):
     @tools.common.ensure_module()
     @tools.common.ensure_import()
     def oauth1_authorize(self, **kw):
+        print('sssssssssssss')
         try:
             if request.httprequest.method.upper() == 'GET':
                 realms, credentials = self.oauth1.get_realms_and_credentials(

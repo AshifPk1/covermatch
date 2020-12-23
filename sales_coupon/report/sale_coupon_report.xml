@@ -7,9 +7,7 @@
             name="sales_coupon.sale_coupon_report_templates"
             file="sales_coupon.sale_coupon_report_templates"
             report_type="qweb-pdf"
-            string="Coupon Genrate"
-            print_report_name="'Coupon for (%s)' % (object.partner_id.name or 'Coupon')"
-            />
+            string="Coupon Genrate"/>
         
         <record id="report_coupon_genrate_code_temp1" model="ir.actions.report">
             <field name="paperformat_id" ref="sales_coupon.paperformat_sales_coupon_custom"/>

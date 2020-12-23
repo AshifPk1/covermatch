@@ -10,6 +10,9 @@
                     <field name="is_insurance_comapny" invisible="1"></field>
                     <field name="is_insurance_broker" invisible="1"></field>
                 </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="is_takaful" attrs="{'invisible': [('is_insurance_comapny', '!=',True)]}"/>
+                </xpath>
             </field>
         </record>
     </data>

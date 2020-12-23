@@ -158,7 +158,6 @@ class CrmLead(models.Model):
     existing_tob = fields.Binary("Existing TOB")
 
     def action_new_quotation(self):
-
         res = super(CrmLead, self).action_new_quotation()
         res['context']['default_business_insurance_type'] = self.business_insurance_type
         res['context']['default_insurence_category'] = self.insurence_category
